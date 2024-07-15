@@ -9,7 +9,7 @@ const albumSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  bgColor: {
+  bgColour: {
     type: String,
     required: true,
   },
