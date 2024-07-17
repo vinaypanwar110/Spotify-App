@@ -26,7 +26,7 @@ const addAlbum = async (req, res) => {
 
 const listAlbum = async (req, res) => {
   try {
-    const allAlbums = await albumModel({});
+    const allAlbums = await albumModel.find({});
     res.json({ success: true, albums: allAlbums });
   } catch (error) {
     res.json({ success: false, message: "Error while listing album" });
