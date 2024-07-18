@@ -29,7 +29,8 @@ const Navbar = () => {
             Install App
           </p> */}
           <p className="bg-purple-600 text-black w-7 h-7 rounded-full flex items-center justify-center">
-            V
+            V 
+            {/*added here user login and sign up function*/}
           </p>
         </div>
       </div>
