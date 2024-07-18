@@ -4,39 +4,59 @@ import { useState } from 'react'
 import { AuthContext } from '../contexts/AuthContext';
 import {useNavigate} from 'react-router-dom';
 import axios from 'axios';
-
 import { URL } from '../App';
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useEffect } from 'react';
 
 const Login = () => {
   const [username,setUsername] = useState('');
   const [password,setPassword] = useState('');
 
-  const {login} = useContext(AuthContext);
+  const {login,user} = useContext(AuthContext);
+
   const navigate = useNavigate();
+
+
+  // useEffect(() => {
+  //   if (user) {
+  //     navigate("/");
+  //     toast.success("Login successful!");
+  //   }
+  // }, [user, navigate]);
+
 
   const handleLogin = async (e) => {
       e.preventDefault();
-      try {
-        console.log(username);
-        console.log(password);
-        const response = await axios.post(`${URL}/api/auth/login`, {
-            username,
-            password
-        });
-        console.log(response);
-        if (response.status === 200) {
-            login(response.data.token);
-            navigate('/');
-        } 
-        else {
-            console.log("Error in login:", response.data.message);
+    try {
+      const response = await axios.post(`${URL}/api/auth/login`, {
+        username,
+        password,
+      });
+      if (response.status === 200) {
+        login(response.data.token);
+        navigate("/");
+      }
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status === 404) {
+          toast.error("User not found. Please sign up.");
+          setTimeout(() => {
+            navigate("/signup");
+          }, 3000); // Wait 3 seconds before redirecting
+        } else if (error.response.status === 400) {
+          toast.error("Incorrect password. Please try again.");
+        } else if (error.response.status === 500) {
+          toast.error("Server error. Please try again later.");
+        } else {
+          toast.error("Error in login: " + error.response.data.message);
         }
-    } 
-    catch (error) {
-        console.error("Error in login:", error.message);
+      } else if (error.request) {
+        console.error("No response received:", error.request);
+      } else {
+        console.error("Error in setting up login request:", error.message);
+      }
     }
-
   }
   
 
