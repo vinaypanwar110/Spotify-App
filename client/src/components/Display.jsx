@@ -5,6 +5,8 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import DisplayHome from "./DisplayHome";
 import DisplayAlbum from "./DisplayAlbum";
 import { PlayerContext } from "../contexts/PlayerContext";
+import Login from "./Login";
+import Signup from "./Signup";
 const Display = () => {
   const { albumsData } = useContext(PlayerContext);
   const  displayRef = useRef();
@@ -27,7 +29,8 @@ const Display = () => {
       ref={displayRef}
       className="w-[100%] m-2 px-6 pt-4 rounded bg-[#121212] text-white overflow-auto lg:w-[75%] lg:ml-0"
     >
-       {albumsData.length > 0 ? <Routes>
+       {albumsData.length > 0 ? 
+       <Routes>
         <Route path="/" element={<DisplayHome />}></Route>
         <Route
           path="/album/:id"
@@ -36,7 +39,10 @@ const Display = () => {
               album={albumsData.find((x) => (x._id == albumId))}
             />
           }
-        ></Route>
+        >
+
+        </Route>
+        
       </Routes> :
       null
       }
