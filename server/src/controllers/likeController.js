@@ -4,6 +4,7 @@ const addLike = async (req,res)=>{
      try {
         const name = req.body.name;
         const album = req.body.album;
+        console.log(name+" "+album);
         const likeData = {
             name,
             album,
@@ -17,7 +18,7 @@ const addLike = async (req,res)=>{
      }
 };
 
-const listLike = async () => {
+const listLike = async (req,res) => {
     try {
         const allLikes = await likeModel.find({});
         res.json({success:true,likes:allLikes});

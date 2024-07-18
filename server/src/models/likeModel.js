@@ -12,5 +12,5 @@ const likeSchema = new mongoose.Schema({
     }
 })
 
-const likeModel = mongoose.models.like || mongoose.model("like", likeSchema);
+const likeModel = mongoose.model("like", likeSchema);
 export default likeModel;

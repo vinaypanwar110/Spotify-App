@@ -16,6 +16,8 @@ const PlayerContextProvider = (props) => {
   const [songsData,setSongsData] = useState([]);
   const [albumsData,setAlbumsData] = useState([]);
 
+  const [volume, setVolume] = useState(0.5); // default volume
+
 
 
 
@@ -31,6 +33,15 @@ const PlayerContextProvider = (props) => {
       minute: 0,
     },
   });
+
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
+  }, [volume]);
+
+
 
   const play = () => {
     audioRef.current.play();
@@ -97,7 +108,7 @@ const PlayerContextProvider = (props) => {
       setSongsData(response.data.songs);
       setTrack(response.data.songs[0]); 
     } catch (error) {
-      toast.message("Error while getSongsData");  
+      toast.error("Error while getSongsData");  
     }
   }
 
@@ -136,6 +147,13 @@ const PlayerContextProvider = (props) => {
       getAlbumsData(); 
   },[])
 
+  const adjustVolume = (value) => {
+    setVolume(value);
+    if (audioRef.current) {
+      audioRef.current.volume = value;
+    }
+  };
+
 
   const contextValue = {
     audioRef,
@@ -155,6 +173,8 @@ const PlayerContextProvider = (props) => {
     seekSong,
     songsData,
     albumsData,
+    volume,
+    setVolume: adjustVolume,
   };
 
   return (
