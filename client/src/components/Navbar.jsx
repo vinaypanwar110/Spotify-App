@@ -1,22 +1,27 @@
-
 import React from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/AuthContext";
 import { assets } from "../assets/assets";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { PlayerContext } from "../contexts/PlayerContext";
+
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { user, logout } = useContext(AuthContext);
+  const {play,pause,playStatus} = useContext(PlayerContext);
 
   const handleLogout = () => {
     logout();
     toast.success("Successfully logged out!");
     navigate("/login");
   };
+  const handlePlayPause = () => {
+    playStatus ? pause() : play();
+  };
+
 
   return (
     <>
@@ -61,10 +66,37 @@ const Navbar = () => {
           )}
         </div>
       </div>
-      <div className="flex items-center gap-2 mt-4">
-        <p className="bg-white text-black px-4 py-1 rounded-2xl">All</p>
-        <p className="bg-black px-4 py-1 rounded-2xl">Music</p>
-        <p className="bg-black px-4 py-1 rounded-2xl">Podcasts</p>
+    {/* <div className="flex items-center gap-2 mt-4">
+      <p className="bg-white text-black px-4 py-1 rounded-2xl">All</p>
+      <p className="bg-black px-4 py-1 rounded-2xl">Music</p>
+      <p className="bg-black px-4 py-1 rounded-2xl">Podcasts</p>
+    </div> */}
+
+<div className="flex items-center gap-2 mt-4">
+        <p
+          className="bg-white text-black px-4 py-1 rounded-2xl cursor-pointer"
+          onClick={() => navigate("/")}
+        >
+          All
+        </p>
+        <p
+          className="bg-black text-white px-4 py-1 rounded-2xl cursor-pointer"
+          onClick={() => navigate("/music")}
+        >
+          Music
+        </p>
+        <p
+          className="bg-black text-white px-4 py-1 rounded-2xl cursor-pointer"
+          onClick={() => navigate("/podcasts")}
+        >
+          Podcasts
+        </p>
+        <button
+          className="bg-black text-white px-4 py-1 rounded-2xl cursor-pointer"
+          onClick={handlePlayPause}
+        >
+          {playStatus ? "Pause" : "Play"}
+        </button>
       </div>
     </>
   );
