@@ -165,6 +165,21 @@
     };
 
 
+    const removeFromLikes = async (songId) => {
+      try {
+        const response = await axios.post(`${URL}/like/remove`, { id: songId });
+        if (response.data.success) {
+          toast.success("Song removed from likes");
+          setSongsData(prevSongsData => prevSongsData.filter(song => song._id !== songId));
+        } else {
+          toast.error("Failed to remove the song");
+        }
+      } catch (error) {
+        toast.error("Error while removing the song");
+      }
+    };
+
+    
 
 
 
@@ -192,7 +207,9 @@
       setVolume: adjustVolume,
       searchQuery,
       setSearchQuery
-
+   ,
+   removeFromLikes
+   
     };
 
     return (

@@ -13,6 +13,19 @@ const DisplayAlbum = ({ album }) => {
   const [likedSongs, setLikedSongs] = useState(new Set());
   const { playWithId, albumsData, songsData } = useContext(PlayerContext);
 
+  const fetchLikes = async () => {
+    try {
+      const response = await axios.get(`${URL}/like/list`);
+      if (response.data.success) {
+        setLikedSongs(response.data.likes);
+      } else {
+        toast.error("Error occur while listing likes");
+      }
+    } catch (error) {
+      toast.error("Error occur while listing likes");
+    }
+  };
+
   useEffect(() => {
     // Fetch album data based on ID
     const selectedAlbum = albumsData.find(item => item._id === id);
@@ -20,6 +33,10 @@ const DisplayAlbum = ({ album }) => {
       setAlbumData(selectedAlbum);
     }
   }, [id, albumsData]);
+
+  useEffect(() => {
+    fetchLikes
+  }, []);
 
   const addtoDatabase = async (songId) => {
     try {
@@ -52,8 +69,6 @@ const DisplayAlbum = ({ album }) => {
   };
 
   const removeFromDatabase = async (songId) => {
-    // Implement removal logic if needed
-
     try {
       const response = await axios.post(`${URL}/like/remove`, { id });
       if (response.data.success) {
@@ -63,8 +78,6 @@ const DisplayAlbum = ({ album }) => {
     catch (error) {
       toast.error("Error while unliking");
     }
-
-
   };
 
   const handleLikeToggle = async (songId) => {
@@ -79,6 +92,7 @@ const DisplayAlbum = ({ album }) => {
       } else {
         await addtoDatabase(songId);
         setLikedSongs(prevLikedSongs => new Set([...prevLikedSongs, songId]));
+        
       }
     } catch (error) {
       console.error("Error toggling like:", error);

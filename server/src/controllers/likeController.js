@@ -4,7 +4,6 @@ const addLike = async (req,res)=>{
      try {
         const name = req.body.name;
         const album = req.body.album;
-        console.log(name+" "+album);
         const likeData = {
             name,
             album,
