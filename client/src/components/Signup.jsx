@@ -18,7 +18,7 @@ const Signup = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
     // try {
-    //   const response = await axios.post(`${URL}/api/auth/signup`, {
+    //   const response = await axios.post(`${URL}/auth/signup`, {
     //     username,
     //     password,
     //   });
@@ -37,7 +37,7 @@ const Signup = () => {
     // }
 
     try {
-      const response = await axios.post(`${URL}/api/auth/signup`, {
+      const response = await axios.post(`${URL}/auth/signup`, {
         username,
         password,
       });

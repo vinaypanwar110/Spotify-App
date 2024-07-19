@@ -22,7 +22,7 @@ const AddAlbum = () => {
       formData.append("image", image);
       formData.append("bgColour", colour);
 
-      const response = await axios.post(`${url}/api/album/add`, formData);
+      const response = await axios.post(`${url}/album/add`, formData);
 
       if (response.data.success) {
         toast.success("Album added");

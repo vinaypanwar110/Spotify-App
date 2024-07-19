@@ -104,7 +104,7 @@ const PlayerContextProvider = (props) => {
 
   const getSongsData = async () => {
     try {
-      const response = await axios.get(`${url}/api/song/list`);
+      const response = await axios.get(`${url}/song/list`);
       setSongsData(response.data.songs);
       setTrack(response.data.songs[0]); 
     } catch (error) {
@@ -114,7 +114,7 @@ const PlayerContextProvider = (props) => {
 
   const getAlbumsData = async () => {
       try {
-        const response  = await axios.get(`${url}/api/album/list`);
+        const response  = await axios.get(`${url}/album/list`);
         setAlbumsData(response.data.albums);
       } catch (error) {
         toast.error("Error while getAlbumData");

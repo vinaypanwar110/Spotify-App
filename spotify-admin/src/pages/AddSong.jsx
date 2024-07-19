@@ -23,7 +23,7 @@ const AddSong = () => {
       formData.append("image", image);
       formData.append("audio", song);
       formData.append("album", album);
-      const response = await axios.post(`${url}/api/song/add`, formData); // sending data to backend
+      const response = await axios.post(`${url}/song/add`, formData); // sending data to backend
       if (response.data.success) {
         toast.success("song added");
         setName("");
@@ -43,7 +43,7 @@ const AddSong = () => {
 
   const loadAlbumData = async () => {
     try {
-       const response = await axios.get(`${url}/api/album/list`);
+       const response = await axios.get(`${url}/album/list`);
 
        if(response.data.success){
         setAlbumData(response.data.albums);

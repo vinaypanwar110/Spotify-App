@@ -15,7 +15,7 @@ const Sidebar = () => {
 
   const fetchLikes = async () => {
     try {
-      const response = await axios.get(`${url}/api/like/list`);
+      const response = await axios.get(`${url}/like/list`);
       console.log(response.data);
       if (response.data.success) {
         setData(response.data.likes);

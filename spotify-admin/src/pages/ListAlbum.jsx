@@ -8,7 +8,7 @@ const ListAlbum = () => {
 
   const fetchAlbums = async () => {
     try {
-      const response = await axios.get(`${url}/api/album/list`);
+      const response = await axios.get(`${url}/album/list`);
       // console.log(response.data);
       if (response.data.success) {
         setData(response.data.albums);
@@ -22,7 +22,7 @@ const ListAlbum = () => {
 
   const removeAlbum = async (id) => {
     try {
-      const response = await axios.post(`${url}/api/album/remove`, { id });
+      const response = await axios.post(`${url}/album/remove`, { id });
       if (response.data.success) {
         toast.success(response.data.message);
         await fetchAlbums();

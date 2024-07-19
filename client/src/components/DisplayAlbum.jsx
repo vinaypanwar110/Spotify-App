@@ -33,7 +33,7 @@ const DisplayAlbum = ({ album }) => {
       formData.append("name", selectedSong.name);
       formData.append("album", selectedSong.album);
 
-      const response = await axios.post(`${url}/api/like/add`, formData);
+      const response = await axios.post(`${url}/like/add`, formData);
 
       if (response.data.success) {
         toast.success("Song liked");
@@ -53,7 +53,7 @@ const DisplayAlbum = ({ album }) => {
     // Implement removal logic if needed
 
     try {
-      const response = await axios.post(`${url}/api/like/remove`, { id });
+      const response = await axios.post(`${url}/like/remove`, { id });
       if (response.data.success) {
         toast.success(response.data.message);
       }

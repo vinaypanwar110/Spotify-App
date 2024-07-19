@@ -18,10 +18,10 @@ app.use(express.json());
 app.use(cors());
 
 // intialising routes
-app.use("/api/song",songRouter);
-app.use("/api/album",albumRouter);
-app.use("/api/like",likeRouter);
-app.use("/api/auth",router);
+app.use("/song",songRouter);
+app.use("/album",albumRouter);
+app.use("/like",likeRouter);
+app.use("/auth",router);
 
 app.get("/", (req, res) => res.send("API WORKING"));
 app.listen(port, () => console.log(`server start at ${port}`));

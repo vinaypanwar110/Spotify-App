@@ -7,7 +7,7 @@ const ListSong = () => {
 
   const fetchSongs = async () => {
     try {
-      const response = await axios.get(`${url}/api/song/list`);
+      const response = await axios.get(`${url}/song/list`);
       console.log(response.data);
       if (response.data.success) {
         setData(response.data.songs || []);
@@ -19,7 +19,7 @@ const ListSong = () => {
 
   const removeSong = async (id) => {
     try {
-      const response = await axios.post(`${url}/api/song/remove`, { id });
+      const response = await axios.post(`${url}/song/remove`, { id });
       if (response.data.success) {
         toast.success(response.data.message);
         await fetchSongs();
