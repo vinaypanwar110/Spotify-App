@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
-import { url } from "../../../spotify-admin/src/App";
+import { URL } from "../App";
 import axios from "axios";
 import { PlayerContext } from "../contexts/PlayerContext";
 
@@ -15,8 +15,7 @@ const Sidebar = () => {
 
   const fetchLikes = async () => {
     try {
-      const response = await axios.get(`${url}/like/list`);
-      console.log(response.data);
+      const response = await axios.get(`${URL}/like/list`);
       if (response.data.success) {
         setData(response.data.likes);
       } else {

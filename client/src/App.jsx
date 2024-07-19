@@ -8,19 +8,19 @@ import PlayerContextProvider, { PlayerContext } from "./contexts/PlayerContext";
 import { AuthProvider } from "./contexts/AuthContext";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-export const URL = "http://localhost:4000";
-
 import { Route, Routes, useLocation } from "react-router-dom";
-import MusicPage from "./components/MusicPage";
+
+
+export const URL = import.meta.env.VITE_REACT_API_URL;
 
 const App = () => {
+   
+  
   const { audioRef, track, songsData } = useContext(PlayerContext);
-
   return (
     <AuthProvider>
       <div className="h-screen bg-black">
         <ToastContainer />
-
         <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />

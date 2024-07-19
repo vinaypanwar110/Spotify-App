@@ -5,7 +5,7 @@ import { assets } from "../assets/assets";
 import { PlayerContext } from "../contexts/PlayerContext";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { url } from "../../../spotify-admin/src/App";
+import { URL } from "../App";
 
 const DisplayAlbum = ({ album }) => {
   const { id } = useParams();
@@ -33,7 +33,7 @@ const DisplayAlbum = ({ album }) => {
       formData.append("name", selectedSong.name);
       formData.append("album", selectedSong.album);
 
-      const response = await axios.post(`${url}/like/add`, formData);
+      const response = await axios.post(`${URL}/like/add`, formData);
 
       if (response.data.success) {
         toast.success("Song liked");
@@ -53,7 +53,7 @@ const DisplayAlbum = ({ album }) => {
     // Implement removal logic if needed
 
     try {
-      const response = await axios.post(`${url}/like/remove`, { id });
+      const response = await axios.post(`${URL}/like/remove`, { id });
       if (response.data.success) {
         toast.success(response.data.message);
       }
