@@ -15,6 +15,8 @@ const Player = () => {
     previous,
     next,
     seekSong,
+    searchQuery,
+    setSearchQuery,
   } = useContext(PlayerContext);
 
   return track ? (
@@ -28,11 +30,6 @@ const Player = () => {
       </div>
       <div className="flex flex-col items-center gap-1 m-auto">
         <div className="flex gap-4">
-          {/* <img
-            className="w-4 cursor-pointer"
-            src={assets.shuffle_icon}
-            alt=""
-          /> */}
           <img
             onClick={previous}
             className="w-5 cursor-pointer"
@@ -60,7 +57,6 @@ const Player = () => {
             src={assets.next_icon}
             alt=""
           />
-          {/* <img className="w-4 cursor-pointer" src={assets.loop_icon} alt="" /> */}
         </div>
         <div className="flex items-center gap-5">
           <p>

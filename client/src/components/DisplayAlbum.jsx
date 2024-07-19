@@ -29,15 +29,17 @@ const DisplayAlbum = ({ album }) => {
         throw new Error("Song not found");
       }
 
-      const formData = new FormData();
-      formData.append("name", selectedSong.name);
-      formData.append("album", selectedSong.album);
-
-      const response = await axios.post(`${URL}/like/add`, formData);
+      const response = await axios.post(`${URL}/like/add`, {
+        name: selectedSong.name,
+        album: selectedSong.album
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
 
       if (response.data.success) {
         toast.success("Song liked");
-        // Update likedSongs state
         setLikedSongs(prevLikedSongs => new Set([...prevLikedSongs, songId]));
       } 
       else {

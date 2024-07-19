@@ -19,8 +19,6 @@
     const [volume, setVolume] = useState(0.5); // default volume
 
 
-
-
     const [track, setTrack] = useState(songsData[1]);
     const [playStatus, setPlayStatus] = useState(false);
     const [time, setTime] = useState({
@@ -33,6 +31,9 @@
         minute: 0,
       },
     });
+
+    const [searchQuery, setSearchQuery] = useState(""); // state for searching
+
 
 
     useEffect(() => {
@@ -54,25 +55,32 @@
     };
 
     const playWithId = async (id) => {
-      // await setTrack(songsData[id]);
-      // await audioRef.current.play();
-      // setPlayStatus(true);
       await songsData.map((item)=>{
         if(id==item._id){
           setTrack(item);
         }
       })
-
       await audioRef.current.play();
       setPlayStatus(true);
     };
 
+
+    const playByName = async (name) => {
+      try {
+        const song = songsData.find(item => item.name.toLowerCase() === name.toLowerCase());
+        if (song) {
+          setTrack(song);
+          await audioRef.current.play();
+          setPlayStatus(true);
+        } else {
+          toast.error("Song not found");
+        }
+      } catch (error) {
+        toast.error("Error playing the song");
+      }
+    };
+
     const previous = async () => {
-      // if (track.id > 0) {
-      //   await setTrack(songsData[track.id - 1]);
-      //   await audioRef.current.play();
-      //   setPlayStatus(true);
-      // }
       songsData.map(async(item,index)=>{
             if(track._id===item._id&&index>0){
                 await setTrack(songsData[index-1]);
@@ -147,12 +155,18 @@
         getAlbumsData(); 
     },[])
 
+
+
     const adjustVolume = (value) => {
       setVolume(value);
       if (audioRef.current) {
         audioRef.current.volume = value;
       }
     };
+
+
+
+
 
 
     const contextValue = {
@@ -168,6 +182,7 @@
       play,
       pause,
       playWithId,
+      playByName,
       previous,
       next,
       seekSong,
@@ -175,6 +190,9 @@
       albumsData,
       volume,
       setVolume: adjustVolume,
+      searchQuery,
+      setSearchQuery
+
     };
 
     return (

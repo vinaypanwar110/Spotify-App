@@ -16,7 +16,7 @@ const signup = async (req, res) => {
     const newUser = new User({ username, password: hashedPassword });
     await newUser.save();
 
-    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: newUser._id, username: newUser.username }, process.env.JWT_SECRET, {
       expiresIn: "3h",
     });
     res.status(201).json({ user: newUser, token });
@@ -47,8 +47,8 @@ const login = async (req, res) => {
         .json({ message: "Wrong Password while checking in backend" });
     }
 
-    const token = jwt.sign({ id: existingUser._id }, process.env.JWT_SECRET, {
-      expiresIn: "3h",
+    const token = jwt.sign({ id: existingUser._id, username: existingUser.username }, process.env.JWT_SECRET, {
+      expiresIn: "5h",
     });
 
     res.status(200).json({ user: existingUser, token });

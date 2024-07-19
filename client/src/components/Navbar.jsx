@@ -42,12 +42,15 @@ const Navbar = () => {
         </div>
         <div className="flex items-center gap-4">
           {user ? (
+            <>
+            <p className="bg-black text-white py-1 px-3 rounded-2xl">{user.username}</p>
             <button
               className="bg-black text-white py-1 px-3 rounded-2xl"
               onClick={handleLogout}
             >
               Logout
             </button>
+          </>
           ) : (
             <>
               <button

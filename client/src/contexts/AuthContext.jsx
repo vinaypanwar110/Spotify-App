@@ -9,8 +9,10 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (token) {
+      console.log('Token:', token); // Log the token
       const decoded = parseJwt(token);
-      setUser({ id: decoded.id });
+      console.log('Decoded Payload:', decoded); // Log the decoded payload
+      setUser({ id: decoded.id, username: decoded.username });
     } else {
       setUser(null);
     }

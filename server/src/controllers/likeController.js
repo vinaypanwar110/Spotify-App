@@ -9,7 +9,7 @@ const addLike = async (req,res)=>{
             name,
             album,
         }
-        const like = likeModel(likeData);
+        const like = new likeModel(likeData);
         await like.save();
         res.json({success:true,message:"song liked"});
      } 

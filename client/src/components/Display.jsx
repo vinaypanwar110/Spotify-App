@@ -52,7 +52,7 @@ const Display = () => {
         </Routes>
       ) : null}
 
-            <Routes>
+        <Routes>
        <Route path="/music" element={<MusicPage />} />
        <Route path="/podcasts" element={<Podcast/>} />
        </Routes>
