@@ -82,10 +82,7 @@ const Sidebar = () => {
             <img src={assets.stack_icon} className="w-8" alt="Likes" />
             <p className="font-semibold">You Liked</p>
           </div>
-          <div className="flex items-center gap-3">
-            <img className="w-5" src={assets.arrow_icon} alt="Arrow" />
-            <img className="w-5" src={assets.plus_icon} alt="Plus" />
-          </div>
+          
         </div>
 
         <div className="overflow-y-auto h-[calc(100%-4rem)]">
